@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Authors>Daniele Fusi</Authors>
+    <Company>Fusi</Company>
+    <Product>Pythia</Product>
+    <Description>Pythia CLI tool Chiron plugin.</Description>
+    <Copyright>by Daniele Fusi 2021</Copyright>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageTags>Pythia</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pythia.Chiron.Plugin\Pythia.Chiron.Plugin.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Corpus.Core.Plugin" Version="4.0.4" />
+    <PackageReference Include="Corpus.Sql.PgSql" Version="2.0.1" />
+    <PackageReference Include="Pythia.Cli.Core" Version="2.0.0" />
+    <PackageReference Include="Pythia.Core.Plugin" Version="2.0.0" />
+    <PackageReference Include="Pythia.Sql.PgSql" Version="2.0.0" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy $(OutDir)*.* $(SolutionDir)pythia\bin\$(ConfigurationName)\net5.0\plugins\$(ProjectName)\ /y" />
+  </Target>
+
+</Project>
